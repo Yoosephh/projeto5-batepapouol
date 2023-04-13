@@ -1,0 +1,36 @@
+body {
+    box-sizing: border-box;
+    background: #E5E5E5;
+}
+ion-icon {
+    width: 26px;
+    height: 26px;
+    margin-right: 22px;
+}
+.logo-batepapo > img {
+    height: 53px;
+    margin-left: 22px;
+}
+.header, .msg-box {
+    height: 12%;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.header {
+    top:0;
+    left:0;
+    z-index: 300;
+
+}
+.msg-box {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+.msgs-box {
+    margin-left: 22px;
+}
