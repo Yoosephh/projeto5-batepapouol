@@ -21,10 +21,10 @@ ion-icon {
     align-items: center;
 }
 .header {
+    position: fixed;
     top:0;
     left:0;
     z-index: 300;
-
 }
 .msg-box {
     position: fixed;
@@ -33,4 +33,54 @@ ion-icon {
 }
 .msgs-box {
     margin-left: 22px;
+}
+.campo-msg {
+    margin-top: 7.5%;
+    margin-bottom: 7.5%;
+}
+.forAll, .statusMsg {
+    height: 45px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+.forAll {
+    background-color: white;
+}
+.statusMsg {
+    background-color: #DCDCDC;
+}
+.timeProperty {
+    color: #AAAAAA;
+    padding: 10px;
+}
+input {
+    border: none;
+    height: 30px;
+    width: 100%;
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+input::placeholder {
+    font-family: 'Roboto';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+input:focus {
+    outline:none;
 }

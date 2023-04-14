@@ -7,7 +7,7 @@ let campoMsg = document.querySelector('input')
 let estruturaMsgs = document.getElementById('msgs');
 
 let seuNome = prompt('Digite um nome ou apelido:')
-axios.defaults.headers.common['Authorization'] = '';
+axios.defaults.headers.common['Authorization'] = 'oeo6PR6eeMEhAS8MNcbBRwIB';
 usuarioEstaOnline()
 
 
@@ -29,51 +29,58 @@ function usuarioEstaOnline() {
 function escolhaOutroNome(){
     seuNome=prompt('O nome ou apelido escolhido esta indisponivel! Tente novamente com outro:')
 }
-let contentTypeStatus = {
-    from: seuNome,
-    to: "Todos",
-    text: "entra na sala...",
-    type: "status",
-    time: " "
-}
+
 let contentTypeMessage = {
     from: seuNome,
     to: "Todos",
     text: " ",
     type: "message"
 }
-let contentTypePMessage = {
-    from: seuNome,
-    to: "Todos",
-    text: " ",
-    type: "private-message",
-    time: " "
-}
+
 enviaMsg.addEventListener('click', sendMsg);
 campoMsg.addEventListener('keydown', function(event) {
     if (event.key === "Enter") {sendMsg()}
 })
 function sendMsg() {
-    textoMsg = document.getElementById('digitarMsg').value;
-    contentTypeMessage.text = textoMsg;
+    textoMsg = document.getElementById('digitarMsg');
+    contentTypeMessage.text = textoMsg.value;
 
     let msgEnviada = axios.post("https://mock-api.driven.com.br/api/vm/uol/messages", contentTypeMessage)
+
+    textoMsg.value = "";
 
     msgEnviada.then(mostrarMsg);
     msgEnviada.catch(showError);
 }
 
+function renderizaMsg(arrayGet) {
+    estruturaMsgs.innerHTML = "";
+    arrayGet.data.forEach( (objects) => {
+
+        if (objects.type === "message") {
+            estruturaMsgs.innerHTML += `<li class="forAll"> <span class="timeProperty">(${objects.time})</span> <strong>${objects.from}</strong>&nbsp;para&nbsp;<strong>${objects.to}</strong>: ${objects.text}</li>` } 
+
+        else if (objects.type === "status") {
+            estruturaMsgs.innerHTML += `<li class="statusMsg"> <span class="timeProperty">(${objects.time})</span> <strong>${objects.from}</strong>&nbsp; ${objects.text}</li>`
+        }
+})}
+
 function mostrarMsg(){
-    console.log("Deu certo!")
+    axios.get("https://mock-api.driven.com.br/api/vm/uol/messages")
+    .then(renderizaMsg)
+    .catch(showError)
 }
 
 function showError(error) {
-    console.log(error.response.data)
-}
+    if (error.response) {
+        console.log(error.response.status);
+      } else {
+        console.log("Error:", error.message);
+      }}
+      
 function entraNaSala() {
     setInterval(() => {axios.post('https://mock-api.driven.com.br/api/vm/uol/status', {
         name: seuNome
-    })
-    .then((res) => console.log(res))}
-    ,2000)
+    })},2000)
+    setInterval(mostrarMsg, 3000)
 }
