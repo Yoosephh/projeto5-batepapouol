@@ -58,10 +58,10 @@ function renderizaMsg(arrayGet) {
     arrayGet.data.forEach( (objects) => {
 
         if (objects.type === "message") {
-            estruturaMsgs.innerHTML += `<li class="forAll"> <span class="timeProperty">(${objects.time})</span> <strong>${objects.from}</strong>&nbsp;para&nbsp;<strong>${objects.to}</strong>: ${objects.text}</li>` } 
+            estruturaMsgs.innerHTML += `<li class="forAll" data-test="message"> <span class="timeProperty">(${objects.time})</span> <strong>${objects.from}</strong>&nbsp;para&nbsp;<strong>${objects.to}</strong>: ${objects.text}</li>` } 
 
         else if (objects.type === "status") {
-            estruturaMsgs.innerHTML += `<li class="statusMsg"> <span class="timeProperty">(${objects.time})</span> <strong>${objects.from}</strong>&nbsp; ${objects.text}</li>`
+            estruturaMsgs.innerHTML += `<li class="statusMsg" data-test="message"> <span class="timeProperty">(${objects.time})</span> <strong>${objects.from}</strong>&nbsp; ${objects.text}</li>`
         }
 })}
 
@@ -77,7 +77,7 @@ function showError(error) {
       } else {
         console.log("Error:", error.message);
       }}
-      
+
 function entraNaSala() {
     setInterval(() => {axios.post('https://mock-api.driven.com.br/api/vm/uol/status', {
         name: seuNome
