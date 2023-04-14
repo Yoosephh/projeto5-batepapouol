@@ -13,7 +13,6 @@ usuarioEstaOnline()
 
 function usuarioEstaOnline() {
     let envioSeuNome
-    console.log("testando")
 
         let quemEntrou = {name : seuNome}
         envioSeuNome = axios.post('https://mock-api.driven.com.br/api/vm/uol/participants', quemEntrou)
@@ -24,10 +23,6 @@ function usuarioEstaOnline() {
             alert('O nome utilizado esta indisponivel!')
             window.location.reload()
         })
-}
-
-function escolhaOutroNome(){
-    seuNome=prompt('O nome ou apelido escolhido esta indisponivel! Tente novamente com outro:')
 }
 
 let contentTypeMessage = {
@@ -49,7 +44,7 @@ function sendMsg() {
 
     textoMsg.value = "";
 
-    msgEnviada.then(mostrarMsg);
+    msgEnviada.then(getMsg);
     msgEnviada.catch(showError);
 }
 
@@ -65,7 +60,7 @@ function renderizaMsg(arrayGet) {
         }
 })}
 
-function mostrarMsg(){
+function getMsg(){
     axios.get("https://mock-api.driven.com.br/api/vm/uol/messages")
     .then(renderizaMsg)
     .catch(showError)
@@ -79,8 +74,9 @@ function showError(error) {
       }}
 
 function entraNaSala() {
+    getMsg()
     setInterval(() => {axios.post('https://mock-api.driven.com.br/api/vm/uol/status', {
         name: seuNome
     })},2000)
-    setInterval(mostrarMsg, 3000)
+    setInterval(getMsg, 3000)
 }
