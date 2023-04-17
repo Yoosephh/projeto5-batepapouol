@@ -83,8 +83,14 @@ function showError(error) {
 
 function entraNaSala() {
     getMsg()
-    setInterval(() => {axios.post('https://mock-api.driven.com.br/api/vm/uol/status', {
+    setInterval(() => {(axios.post('https://mock-api.driven.com.br/api/vm/uol/status', {
         name: seuNome
-    })},2000)
+    })).catch(usuarioEstaOffline)},5000)
     setInterval(getMsg, 3000)
+}
+
+function usuarioEstaOffline() {
+    alert("Voce foi descontectado por inatividade!")
+    window.location.reload();
+    usuarioEstaOnline();
 }
