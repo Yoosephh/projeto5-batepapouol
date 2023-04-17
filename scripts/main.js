@@ -36,6 +36,7 @@ enviaMsg.addEventListener('click', sendMsg);
 campoMsg.addEventListener('keydown', function(event) {
     if (event.key === "Enter") {sendMsg()}
 })
+
 function sendMsg() {
     textoMsg = document.getElementById('digitarMsg');
     contentTypeMessage.text = textoMsg.value;
@@ -50,7 +51,9 @@ function sendMsg() {
 
 function renderizaMsg(arrayGet) {
     estruturaMsgs.innerHTML = "";
-    arrayGet.data.forEach( (objects) => {
+    let startIndex = (arrayGet.data.length > 100) ? arrayGet.data.length - 100 : 0;
+    for(let i = startIndex; i < arrayGet.data.length; i++) {
+        let objects = arrayGet.data[i];
 
         if (objects.type === "message") {
             estruturaMsgs.innerHTML += `<li class="forAll" data-test="message"> <span class="timeProperty">(${objects.time})</span> <strong>${objects.from}</strong>&nbsp;para&nbsp;<strong>${objects.to}</strong>: ${objects.text}</li>` } 
@@ -58,7 +61,12 @@ function renderizaMsg(arrayGet) {
         else if (objects.type === "status") {
             estruturaMsgs.innerHTML += `<li class="statusMsg" data-test="message"> <span class="timeProperty">(${objects.time})</span> <strong>${objects.from}</strong>&nbsp; ${objects.text}</li>`
         }
-})}
+        else if (objects.type === "private_message"){
+            if (objects.to === seuNome){
+                estruturaMsgs.innerHTML += `<li class="forAll" data-test="message"> <span class="timeProperty">(${objects.time})</span> <strong>${objects.from}</strong>&nbsp;para&nbsp;<strong>${objects.to}</strong>: ${objects.text}</li>` } 
+        }
+    }
+}
 
 function getMsg(){
     axios.get("https://mock-api.driven.com.br/api/vm/uol/messages")

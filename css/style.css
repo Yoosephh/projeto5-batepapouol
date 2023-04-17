@@ -12,7 +12,7 @@ ion-icon {
     margin-left: 22px;
 }
 .header, .msg-box {
-    height: 12%;
+    height: calc(10vh);
     width: 100%;
     background-color: white;
     display: flex;
@@ -35,11 +35,11 @@ ion-icon {
     margin-left: 22px;
 }
 .campo-msg {
-    margin-top: 7.5%;
-    margin-bottom: 7.5%;
+    margin-top: 65px;
+    margin-bottom: 65px;
 }
-.forAll, .statusMsg {
-    height: 45px;
+.forAll, .statusMsg, .privateMsg {
+    height: auto;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
@@ -48,12 +48,21 @@ ion-icon {
     display: flex;
     align-items: center;
     margin-top: 5px;
+    width: 100%;
+    word-wrap: break-word;
 }
 .forAll {
     background-color: white;
 }
 .statusMsg {
     background-color: #DCDCDC;
+}
+.privateMsg {
+    background-color: #FFDEDE;
+}
+.text {
+    display: flex;
+    word-wrap: break-word;
 }
 .timeProperty {
     color: #AAAAAA;
